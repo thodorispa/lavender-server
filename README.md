@@ -1,2 +1,4 @@
-# LavenderWebApp
-Bachelor thesis part 1. Spring server &amp; web app
+# Lavender WebApp
+My Bachelor's thesis.
+
+This repo consists of the server written in Java 11 using Spring framework and some basic templates.
