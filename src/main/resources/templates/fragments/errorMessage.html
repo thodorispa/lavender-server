@@ -1,0 +1,10 @@
+<!--suppress XmlUnboundNsPrefix, ThymeleafVariablesResolveInspection -->
+<link rel="stylesheet" th:href="@{./styles.css}">
+
+<div th:fragment="registerError">
+    <b th:class="${displayError}" th:text="${errorText}"></b>
+</div>
+
+<div th:fragment="userNotFound">
+    <b th:class="${displayError}">User Not Found</b>
+</div>

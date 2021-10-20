@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Log in with your account</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+<!--    <link rel="stylesheet" href="/Users/thodorispachis/IntelliJIDEAProjects/demo/src/main/resources/static/styles.css">-->
+</head>
+
+<body>
+<nav class="navbar">
+    <h1>Lavender</h1>
+    <div class="links">
+        <a href="/">Home</a>
+        <a class="active" href="login">Login</a>
+    </div>
+    <a href="registration">Create New</a>
+</nav>
+
+<div class="cards">
+    <div class="card">
+
+        <form th:action="@{/login}" method="post" name="form">
+            <h3 class="h3-login"> Log in </h3>
+
+            <label>Username: </label>
+            <input class="field" type="text" autofocus="true"  name="username" placeholder="Username..."/>
+
+            <label>Password:  </label>
+            <input class="field" type="password" name="password" placeholder="Password..."/>
+
+            <span class="has-error" th:text="${error}"></span>
+            <p class="login-buttons"><input class="button" type="reset" value="Reset" />    <input id="submit" class="button" type="submit" value="Log In" /> </p>
+        </form>
+    </div>
+</div>
+</body>
+</html>

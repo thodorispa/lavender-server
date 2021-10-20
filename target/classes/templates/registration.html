@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Create an account</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+<!--    <link rel="stylesheet" href="/Users/thodorispachis/IntelliJIDEAProjects/demo/src/main/resources/static/styles.css">-->
+
+</head>
+
+<body>
+
+<nav class="navbar">
+    <h1>Lavender</h1>
+    <div class="links">
+        <a href="/">Home</a>
+        <a href="login">Login</a>
+        <a class="active" href="registration">Create New</a>
+    </div>
+</nav>
+
+<div class="cards">
+    <div class="card">
+
+        <form method="post"  th:object="${userForm}" th:action="@{/registration}">
+            <h3>Register</h3>
+            <label>Username: </label>
+                <input type="text" th:field="*{username}" class="field" placeholder="Username"
+                       autofocus="true">
+                <span class="has-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+            <label>Password:  </label>
+                <input type="password" th:field="*{password}" class="field" placeholder="Password">
+                <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            <label>Confirm Password:  </label>
+                <input type="password" th:field="*{passwordConfirm}" class="field"
+                       placeholder="Confirm your password">
+                <span class="has-error" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></span>
+
+            <p><input class="button" type="reset" value="Reset" />    <input id="submit" class="button" type="submit" value="Register" /> </p>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/user-settings.css}">
+    <title>View Data</title>
+</head>
+<body>
+<nav class="navbar">
+    <h1>Lavender</h1>
+    <div class="links">
+        <a href="/">Home</a>
+        <a href="/global-statistics">Global Data</a>
+        <a href="/logout">Logout</a>
+    </div>
+</nav>
+<div class="center">
+    <div class="flex">
+        <table class="table">
+            <caption th:text="${title}"></caption>
+            <thead>
+            <tr class="headings">
+                <th th:each="header: ${headers}" class="column-title" th:text="${header}" />
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="even pointer" th:each="row: ${rows}" id="tablerow">
+                <td th:each="header: ${headers}" th:text="${row.get(header)}" />
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="total" class="flex">
+        <h3 th:text="${total}"></h3>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+/* base styles */
+* {
+    margin: 0;
+    font-family: "Quicksand";
+    color: #333;
+}
+.navbar {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    border-bottom: 1px solid #f2f2f2;
+}
+.navbar h1 {
+    color: #8358CF;
+}
+.navbar .links {
+    margin-left: auto;
+}
+.navbar a {
+    margin-left: 16px;
+    text-decoration: none;
+    padding: 6px;
+}
+.registerButton{
+    background-color: #8358CF ;
+    border-radius: 8px;
+}
+.navbar a:hover{
+    color: white;
+    background-color: #8358CF;
+    border-radius: 8px;
+}
+.active {
+    background-color: #8358CF;
+    border-radius: 8px;
+    color: white;
+}
+
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 7em;
+}
+
+
+
+h3 {
+    color: #243fea;
+    margin-left: 4.3em;
+}
+
+.h3-login {
+    color: #243fea;
+
+}
+
+.cards {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 5em;
+}
+
+.card {
+    display: flex;
+    min-width: 230px;
+    border: 1px solid;
+    border-radius: 25px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: auto;
+}
+
+.card>form{
+    padding: 15px;
+}
+
+.card:nth-child(2) {
+    margin-left: 3em;
+}
+
+.card:nth-child(3) {
+    margin-left: 3em;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.field {
+    width: 200px;
+    height: 25px;
+    outline: none;
+    border: 1px solid #243fea;
+    border-radius: 13px;
+    padding: 3px;
+    padding-left: 15px;
+}
+
+label {
+    width: 210px;
+    font-size: 14px;
+    margin-top: 0.5em;
+    font-style:italic;
+}
+
+.button {
+    width: 100px;
+    height: 25px;
+    border: 3px solid #243fea;
+    background-color: #243fea ;
+    color: white;
+    border-radius: 12px;
+    font-weight: bold;
+    margin-top: 1em;
+    cursor:pointer;
+    margin-left: 0.4em;
+}
+
+.radio{
+    width: 75px;
+    font-weight:600;
+}
+
+.button:hover{
+    background-color: #8358CF;
+}
+
+#submit:hover {
+    background-color: #0bca05;
+}
+
+input[type="text"]
+{
+    font-size:15px;
+    font-weight: 600;
+}
+
+input[type="password"]
+{
+    font-size:15px;
+    font-weight: 600;
+}
+
+.field:focus
+{
+    border: 2px solid #243fea;
+}
+
+
+.user-type {
+    display: flex;
+    margin-top: 0.3em;
+}
+
+.user-type>label>input {
+    margin-left: 0.3em;
+    cursor: pointer;
+}
+.user-type>label{
+    cursor: pointer;
+    font-style: normal;
+}
+
+.login-buttons{
+    margin-top: 0.3em;
+}
+
+.error-found {
+    display: block;
+    margin-left: 5px;
+    color: red;
+    font-size: 11px;
+}
+
+.error-not-found{
+    display: none;
+}
+
+.dates{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2em;
+    margin-left: 25.5em;
+}
+
+.dates>h3 {
+    margin-bottom: 0.5em;
+}
+
+td {
+    padding-right: 20px;
+}
+
+th {
+    padding-right: 20px;
+}
+
+caption{
+    color: #243fea;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 0.5em;
+}
+
+[type="date"] {
+    background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+}
+[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
+
+#dateofbirth {
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 3px 5px;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+    width: 150px;
+}
+
+#search{
+    border: 2px solid #180a83;
+    border-radius: 5px;
+    color: white;
+    background-color: #180a83;
+    text-decoration-color: white;
+    width: 130px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.center {
+    display: flex;
+    margin-top: 5em;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.flex {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+#total {
+    margin-top: 3em;
+    margin-right: 4em;
+}
+
+#queryTitles {
+    font-weight: bold;
+    color: #243fea;
+}
+
+.personal-container {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+.horizontal{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width:50%;
+}
+
+.vertical {
+    flex-direction: row;
+    margin-top: 5em;
+}
+
+.vertical:first-child{
+    margin-left: 47em;
+}
+.vertical:last-child{
+    margin-left: 2em;
+}
+
+.customDates {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 9em;
+
+}
+.customDates>* {
+    flex: 0 0 33.3333%;
+}
+
+#graphH {
+    margin-right: 4em;
+}
+
+.has-error {
+    color: red;
+    font-size: small;
+}
+
+#horizontal {
+    margin-left: 20em;
+}
+
+#globalH {
+    margin-left: 9em;
+    margin-bottom: 1em;
+    font-size: larger;
+}
+
+.globalTitle {
+    margin-left: 20em;
+}
+
+
+
+

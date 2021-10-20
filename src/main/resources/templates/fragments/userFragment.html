@@ -1,0 +1,60 @@
+<!--suppress XmlUnboundNsPrefix -->
+<link rel="stylesheet" th:href="@{./styles.css}">
+
+    <div  class="main" th:fragment="userFragment" >
+        <div class="horizontal">
+            <div  class="vertical">
+                <div>
+                    <div class="container">
+                        <h3 id="graphH" align="center">Your Sleeping Map</h3>
+
+                        <div id="container"
+                             style="width: 380px; height: 355px; margin: 0 auto"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vertical">
+                <div>
+                    <div class="container">
+                        <h3 id="graphH" align="center">Last week's projection</h3>
+    
+                        <div id="barChart"
+                             style="width: 400px; height: 330px; margin: 0 auto"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="dates">
+            <div>
+                <form th:action="@{/view/}"  th:object="${form}" method="get">
+                    <p id="queryTitles">Search Single Date</p>
+                    <label>Choose a date</label>
+                    <input id="dateofbirth"  type="date" name="date" th:field="${form.date}">
+
+                    <button type="submit" id="search">Search</button>
+                </form>
+            </div>
+            <div>
+                <p style="margin-left: 9em" id="queryTitles">Search Custom Dates</p>
+                <form class="customDates" th:action="@{/view-custom/}"  th:object="${customDateModel}" method="get">
+                    <label>Choose starting date</label>
+                    <label >Choose final date</label>
+                    <input id="dateofbirth" type="date" name="date" th:field="${customDateModel.first_date}">
+
+                    <input id="dateofbirth" type="date" name="date" th:field="${customDateModel.last_date}">
+                    <button type="submit" id="search">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+

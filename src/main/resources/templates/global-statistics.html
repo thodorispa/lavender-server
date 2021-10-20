@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <title>Global Statistics</title>
+</head>
+<body>
+<nav class="navbar">
+    <h1>Lavender</h1>
+    <div class="links">
+        <a href="/">Home</a>
+        <a class="active" href="/global-statistics">Global Data</a>
+        <a href="/logout">Logout</a>
+    </div>
+</nav>
+<div id="main">
+
+    <h2 class="globalTitle">Average daily sleep by country.</h2>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script>
+    var i = 0;
+    var days = ["MON","TUE","WED","THU","FRI","SAT","SUN"]
+    $.ajax({
+        url : "/get-global",
+        type: "GET",
+        success: function (data) {
+            for (const row of data) {
+                createChartHTML(row)
+            }
+        }
+    });
+
+    function createChartHTML(row){
+        var keys = [],
+            values = [];
+        var country;
+        // Seperate keys-values in two arrays
+        for (var temp in row) {
+            if ( ! row.hasOwnProperty(temp)) {
+                continue;
+            }
+            if (!days.includes(temp)) {
+                country = temp;
+            }else {
+                keys.push(temp);
+                values.push(row[temp]);
+            }
+        }
+
+        var sum = 0;
+        var count = 0;
+        for (let j = 0; j < values.length ; j++) {
+            if (values[j]>0) {
+                sum += values[j]
+                count++
+            }
+        }
+        var avg = sum/count;
+
+        if (count === 1) {
+            avg = null;
+        }
+
+        i = i + 1;
+        var containerName = "graph" + i
+        var tree = document.createDocumentFragment();
+        var horizontal = document.createElement("div");
+        horizontal.setAttribute("class", "horizontal");
+        horizontal.setAttribute("id", "horizontal");
+        tree.appendChild(horizontal);
+
+        var container = document.createElement("div");
+        container.setAttribute("class", "vertical");
+        horizontal.appendChild(container);
+
+
+
+        var div = document.createElement("div");
+        div.setAttribute("class", "container");
+        container.appendChild(div);
+
+        var chartTitle = document.createElement("h3");
+        chartTitle.setAttribute("id", "globalH");
+        chartTitle.appendChild(document.createTextNode(country));
+        div.appendChild(chartTitle);
+
+
+        var chart = document.createElement("div");
+        chart.setAttribute("id", "graph"+i);
+        chart.setAttribute("style","width: 400px; height: 300px; margin: 0 auto");
+        div.appendChild(chart)
+
+        document.getElementById("main").appendChild(tree);
+            Highcharts.chart(containerName, {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: null
+                },
+                subtitle: {
+                    text: null
+                },
+                xAxis: {
+                    categories: keys,
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    max:24,
+                    title: {
+                        text: 'Hours slept each day'
+                    },
+                    plotLines: [{
+                        color: 'orange',
+                        value: avg, // Insert your average here
+                        width: '2',
+                        zIndex: 4,
+                        label: {
+                            text: 'Average',
+                            align: 'right',
+                            y: 10
+                        }
+                    }]
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y} hour(s)</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Hours slept' ,
+                    data: values
+                }]
+            });
+    }
+</script>
+</body>
+</html>

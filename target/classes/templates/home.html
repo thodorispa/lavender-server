@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <title>Home</title>
+</head>
+<body>
+<div class="navbar" th:replace="('fragments/' + ${navType}) :: (${navType})"></div>
+
+
+<div th:replace="('fragments/' + ${homeType}) :: (${homeType})"></div>
+
+
+
+<script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script th:inline="javascript">
+    var keys = [];
+    var values = [];
+    function drawChart() {
+        Highcharts.chart('container', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+            title: {
+                text: 'Most<br>preferred<br>sleeping hours',
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 60
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        enabled: true,
+                        distance: -50,
+                        style: {
+                            fontWeight: 'bold',
+                            color: 'white'
+                        }
+                    },
+                    startAngle: -90,
+                    endAngle: 90,
+                    center: ['50%', '75%'],
+                    size: '110%'
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Times slept in %',
+                innerSize: '50%',
+                data : [
+                    {
+                        name: keys[3],
+                        y: values[3]
+                    },
+                    {
+                        name: keys[2],
+                        y: values[2]
+                    },
+                    {
+                        name: keys[1],
+                        y: values[1]
+                    },
+                    {
+                        name: keys[0],
+                        y: values[0]
+                    }
+                ]
+            }]
+
+        });
+    }
+
+
+    $.ajax({
+        url : "/get-top-five",
+        success : function(result) {
+            Object.keys(result).forEach(
+                function(key) {
+                    if(result[key] == 0){
+                        keys.push("");
+                    } else {
+                        keys.push(key);
+                    }
+                    values.push(result[key]);
+                    console.log(key, result[key])
+                });
+            drawChart(keys, values);
+        }
+
+    });
+</script>
+<script th:inline="javascript">
+    $(function(){
+        Highcharts.chart('barChart', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: null
+            },
+            subtitle: {
+                text: null
+            },
+            xAxis: {
+                categories: [[${values.keySet()}]],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                max:24,
+                title: {
+                    text: 'Hours slept each day'
+                },
+                plotLines: [{
+                    color: 'orange',
+                    value: [[${median}]], // Insert your average here
+                    width: '2',
+                    zIndex: 4,
+                    label: {
+                        text: 'Average',
+                        align: 'right',
+                        y: 10
+                    }
+                }]
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y} hour(s)</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Hours slept' ,
+                data: [[${values.values()}]]
+            }]
+        });
+    });
+</script>
+</body>
+</html>
